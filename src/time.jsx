@@ -25,6 +25,7 @@ export default class Time extends React.Component {
     excludeTimes: PropTypes.array,
     monthRef: PropTypes.object,
     timeCaption: PropTypes.string,
+    hideDisabledTimes: PropTypes.bool,
     injectTimes: PropTypes.array,
     locale: PropTypes.oneOfType([
       PropTypes.string,
@@ -94,7 +95,11 @@ export default class Time extends React.Component {
       (this.props.includeTimes &&
         !isTimeDisabled(time, this.props.includeTimes))
     ) {
-      classes.push("react-datepicker__time-list-item--disabled");
+      if (this.props.hideDisabledTimes) {
+        classes.push("react-datepicker__time-list-item--hidden");
+      } else {
+        classes.push("react-datepicker__time-list-item--disabled");
+      }
     }
     if (
       this.props.injectTimes &&
@@ -108,6 +113,7 @@ export default class Time extends React.Component {
 
   renderTimes = () => {
     let times = [];
+
     const format = this.props.format ? this.props.format : "p";
     const intervals = this.props.intervals;
     const activeTime = this.props.selected ? this.props.selected : newDate();
@@ -123,7 +129,6 @@ export default class Time extends React.Component {
     for (let i = 0; i < multiplier; i++) {
       const currentTime = addMinutes(base, i * intervals);
       times.push(currentTime);
-
       if (sortedInjectTimes) {
         const timesToInject = timesToInjectAfter(
           base,

@@ -289,9 +289,12 @@
               background-color: $datepicker__selected-color;
             }
           }
+          &--hidden {
+            color: $datepicker__muted-color;
+            display: none;
+          }
           &--disabled {
             color: $datepicker__muted-color;
-
             &:hover {
               cursor: default;
               background-color: transparent;

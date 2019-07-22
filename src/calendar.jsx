@@ -115,6 +115,7 @@ export default class Calendar extends React.Component {
     withPortal: PropTypes.bool,
     weekLabel: PropTypes.string,
     yearDropdownItemNumber: PropTypes.number,
+    hideDisabledTimes: PropTypes.bool,
     setOpen: PropTypes.func,
     shouldCloseOnSelect: PropTypes.bool,
     useShortMonthInDropdown: PropTypes.bool,
@@ -669,6 +670,7 @@ export default class Calendar extends React.Component {
           selected={this.props.selected}
           onChange={this.props.onTimeChange}
           format={this.props.timeFormat}
+          hideDisabledTimes={this.props.hideDisabledTimes}
           includeTimes={this.props.includeTimes}
           intervals={this.props.timeIntervals}
           minTime={this.props.minTime}

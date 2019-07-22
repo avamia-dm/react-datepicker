@@ -131,6 +131,7 @@ export default class DatePicker extends React.Component {
     showMonthYearDropdown: PropTypes.bool,
     showWeekNumbers: PropTypes.bool,
     showYearDropdown: PropTypes.bool,
+    hideDisabledTimes: PropTypes.bool,
     strictParsing: PropTypes.bool,
     forceShowMonthNavigation: PropTypes.bool,
     showDisabledMonthNavigation: PropTypes.bool,
@@ -194,6 +195,7 @@ export default class DatePicker extends React.Component {
       showTimeSelect: false,
       showTimeInput: false,
       showMonthYearPicker: false,
+      hideDisabledTimes: false,
       strictParsing: false,
       timeIntervals: 30,
       timeCaption: "Time",
@@ -668,6 +670,7 @@ export default class DatePicker extends React.Component {
         onTimeChange={this.handleTimeChange}
         timeFormat={this.props.timeFormat}
         timeIntervals={this.props.timeIntervals}
+        hideDisabledTimes={this.props.hideDisabledTimes}
         minTime={this.props.minTime}
         maxTime={this.props.maxTime}
         excludeTimes={this.props.excludeTimes}
