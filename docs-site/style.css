@@ -385,6 +385,14 @@
   .react-datepicker__time
   .react-datepicker__time-box
   ul.react-datepicker__time-list
+  li.react-datepicker__time-list-item--hidden {
+  color: #ccc;
+  display: none;
+}
+.react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list
   li.react-datepicker__time-list-item--disabled {
   color: #ccc;
 }

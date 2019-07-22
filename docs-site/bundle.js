@@ -17897,7 +17897,7 @@
 
       var _example_components2 = _interopRequireDefault(_example_components);
 
-      var _hero_example = __webpack_require__(749);
+      var _hero_example = __webpack_require__(750);
 
       var _hero_example2 = _interopRequireDefault(_hero_example);
 
@@ -18361,9 +18361,13 @@
 
       var _range_month_picker2 = _interopRequireDefault(_range_month_picker);
 
-      __webpack_require__(747);
+      var _hide_disabled_times = __webpack_require__(747);
+
+      var _hide_disabled_times2 = _interopRequireDefault(_hide_disabled_times);
 
       __webpack_require__(748);
+
+      __webpack_require__(749);
 
       function _interopRequireDefault(obj) {
         return obj && obj.__esModule ? obj : { default: obj };
@@ -18476,6 +18480,13 @@
                 title: "Specific Time Range",
                 component: _react2.default.createElement(
                   _exclude_time_period2.default,
+                  null
+                )
+              },
+              {
+                title: "Hide Disabled Times",
+                component: _react2.default.createElement(
+                  _hide_disabled_times2.default,
                   null
                 )
               },
@@ -43341,6 +43352,7 @@
                 showTimeSelect: false,
                 showTimeInput: false,
                 showMonthYearPicker: false,
+                hideDisabledTimes: false,
                 strictParsing: false,
                 timeIntervals: 30,
                 timeCaption: "Time",
@@ -43844,6 +43856,7 @@
                 onTimeChange: _this.handleTimeChange,
                 timeFormat: _this.props.timeFormat,
                 timeIntervals: _this.props.timeIntervals,
+                hideDisabledTimes: _this.props.hideDisabledTimes,
                 minTime: _this.props.minTime,
                 maxTime: _this.props.maxTime,
                 excludeTimes: _this.props.excludeTimes,
@@ -44968,6 +44981,7 @@
                 selected: _this.props.selected,
                 onChange: _this.props.onTimeChange,
                 format: _this.props.timeFormat,
+                hideDisabledTimes: _this.props.hideDisabledTimes,
                 includeTimes: _this.props.includeTimes,
                 intervals: _this.props.timeIntervals,
                 minTime: _this.props.minTime,
@@ -58003,7 +58017,11 @@
                     _this.props.includeTimes
                   ))
               ) {
-                classes.push("react-datepicker__time-list-item--disabled");
+                if (_this.props.hideDisabledTimes) {
+                  classes.push("react-datepicker__time-list-item--hidden");
+                } else {
+                  classes.push("react-datepicker__time-list-item--disabled");
+                }
               }
               if (
                 _this.props.injectTimes &&
@@ -58019,6 +58037,7 @@
             }),
             (_this.renderTimes = function() {
               var times = [];
+
               var format = _this.props.format ? _this.props.format : "p";
               var intervals = _this.props.intervals;
               var activeTime = _this.props.selected
@@ -58041,7 +58060,6 @@
                   i * intervals
                 );
                 times.push(currentTime);
-
                 if (sortedInjectTimes) {
                   var timesToInject = (0, _date_utils.timesToInjectAfter)(
                     base,
@@ -72227,13 +72245,191 @@
       /***/
     },
     /* 747 */
+    /***/ function(module, exports, __webpack_require__) {
+      "use strict";
+
+      exports.__esModule = true;
+
+      var _react = __webpack_require__(332);
+
+      var _react2 = _interopRequireDefault(_react);
+
+      var _reactDatepicker = __webpack_require__(529);
+
+      var _reactDatepicker2 = _interopRequireDefault(_reactDatepicker);
+
+      var _setMinutes = __webpack_require__(593);
+
+      var _setMinutes2 = _interopRequireDefault(_setMinutes);
+
+      var _setHours = __webpack_require__(594);
+
+      var _setHours2 = _interopRequireDefault(_setHours);
+
+      function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : { default: obj };
+      }
+
+      function _classCallCheck(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+          throw new TypeError("Cannot call a class as a function");
+        }
+      }
+
+      function _possibleConstructorReturn(self, call) {
+        if (!self) {
+          throw new ReferenceError(
+            "this hasn't been initialised - super() hasn't been called"
+          );
+        }
+        return call && (typeof call === "object" || typeof call === "function")
+          ? call
+          : self;
+      }
+
+      function _inherits(subClass, superClass) {
+        if (typeof superClass !== "function" && superClass !== null) {
+          throw new TypeError(
+            "Super expression must either be null or a function, not " +
+              typeof superClass
+          );
+        }
+        subClass.prototype = Object.create(superClass && superClass.prototype, {
+          constructor: {
+            value: subClass,
+            enumerable: false,
+            writable: true,
+            configurable: true
+          }
+        });
+        if (superClass)
+          Object.setPrototypeOf
+            ? Object.setPrototypeOf(subClass, superClass)
+            : (subClass.__proto__ = superClass);
+      }
+
+      var HideDisabledTimes = (function(_React$Component) {
+        _inherits(HideDisabledTimes, _React$Component);
+
+        function HideDisabledTimes() {
+          var _temp, _this, _ret;
+
+          _classCallCheck(this, HideDisabledTimes);
+
+          for (
+            var _len = arguments.length, args = Array(_len), _key = 0;
+            _key < _len;
+            _key++
+          ) {
+            args[_key] = arguments[_key];
+          }
+
+          return (
+            (_ret = ((_temp = ((_this = _possibleConstructorReturn(
+              this,
+              _React$Component.call.apply(_React$Component, [this].concat(args))
+            )),
+            _this)),
+            (_this.state = {
+              startDate: (0, _setHours2.default)(
+                (0, _setMinutes2.default)(new Date(), 30),
+                17
+              )
+            }),
+            (_this.handleChange = function(date) {
+              _this.setState({
+                startDate: date
+              });
+            }),
+            _temp)),
+            _possibleConstructorReturn(_this, _ret)
+          );
+        }
+
+        HideDisabledTimes.prototype.render = function render() {
+          return _react2.default.createElement(
+            "div",
+            { className: "row" },
+            _react2.default.createElement(
+              "pre",
+              { className: "column example__code" },
+              _react2.default.createElement(
+                "code",
+                { className: "jsx" },
+                "<DatePicker",
+                _react2.default.createElement("br", null),
+                "  selected={this.state.startDate}",
+                _react2.default.createElement("br", null),
+                "  onChange={this.handleChange}",
+                _react2.default.createElement("br", null),
+                _react2.default.createElement(
+                  "strong",
+                  null,
+                  "  showTimeSelect",
+                  _react2.default.createElement("br", null),
+                  "  minTime={setHours(setMinutes(new Date(), 0), 10)}",
+                  _react2.default.createElement("br", null),
+                  "  maxTime={setHours(setMinutes(new Date(), 30), 20)}",
+                  _react2.default.createElement("br", null),
+                  "  excludeTimes={[setHours(setMinutes(new Date(), 0), 12), setHours(setMinutes(new Date(), 30), 15), setHours(setMinutes(new Date(), 30), 17)]}",
+                  _react2.default.createElement("br", null),
+                  '  dateFormat="MMMM d, yyyy"'
+                ),
+                _react2.default.createElement("br", null),
+                "/>"
+              )
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "column" },
+              _react2.default.createElement(_reactDatepicker2.default, {
+                selected: this.state.startDate,
+                onChange: this.handleChange,
+                showTimeSelect: true,
+                excludeTimes: [
+                  (0, _setHours2.default)(
+                    (0, _setMinutes2.default)(new Date(), 0),
+                    12
+                  ),
+                  (0, _setHours2.default)(
+                    (0, _setMinutes2.default)(new Date(), 30),
+                    15
+                  ),
+                  (0, _setHours2.default)(
+                    (0, _setMinutes2.default)(new Date(), 30),
+                    17
+                  )
+                ],
+                minTime: (0, _setHours2.default)(
+                  (0, _setMinutes2.default)(new Date(), 0),
+                  10
+                ),
+                maxTime: (0, _setHours2.default)(
+                  (0, _setMinutes2.default)(new Date(), 30),
+                  20
+                ),
+                hideDisabledTimes: true,
+                dateFormat: "MMMM d, yyyy h:mm aa"
+              })
+            )
+          );
+        };
+
+        return HideDisabledTimes;
+      })(_react2.default.Component);
+
+      exports.default = HideDisabledTimes;
+
+      /***/
+    },
+    /* 748 */
     /***/ function(module, exports) {
       // removed by extract-text-webpack-plugin
       /***/
     },
-    /* 748 */
-    747,
     /* 749 */
+    748,
+    /* 750 */
     /***/ function(module, exports, __webpack_require__) {
       "use strict";
 
